@@ -46,7 +46,7 @@ void CountingSort(int A[], int n, int d){
 }
 
 void LsdRedixSort(int A[], int n){
-    for(int d = 1; d < n; d++){
+    for(int d = 1; d < dn; d++){
         CountingSort(A, n, d);
     }
 }
@@ -64,7 +64,7 @@ int main(){
     // }
 
     PA_DisplayData(_source, nCount);
-    // LsdRedixSort(_source, nCount);
+    LsdRedixSort(_source, nCount);
     PA_DisplayData(_source, nCount);
 
     return 0;
