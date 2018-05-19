@@ -18,11 +18,11 @@ int nFactor = MAX % bn ? MAX / bn + 1 : MAX / bn;
 
 int C[bn];
 
-void InsertionSort(int data[], int left, int right){
-    for(int i = left + 1; i <= right; i++){
+void InsertionSort(int data[], int nLeft, int nRight){
+    for(int i = nLeft + 1; i <= nRight; i++){
         int get = data[i];
         int j = i - 1;
-        while(j >= left && data[j] > get){
+        while(j >= nLeft && data[j] > get){
             data[j + 1] = data[j];
             j--;
         }
