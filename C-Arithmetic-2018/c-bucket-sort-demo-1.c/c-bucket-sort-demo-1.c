@@ -58,10 +58,10 @@ void CountingSort(int data[], int n){
 void BucketSort(int data[], int n){
     CountingSort(data, n);
     for(int i = 0; i < bn; i++){
-        int left = C[i];
-        int right = (i == bn - 1 ? n - 1 : C[i + 1] - 1); // C[i + 1] - 1为i号桶最后一个元素的位置
-        if(left < right){
-            InsertionSort(data, left, right);
+        int nLeft = C[i];
+        int nRight = (i == bn - 1 ? n - 1 : C[i + 1] - 1); // C[i + 1] - 1为i号桶最后一个元素的位置
+        if(nLeft < nRight){
+            InsertionSort(data, nLeft, nRight);
         }
     }
 }
