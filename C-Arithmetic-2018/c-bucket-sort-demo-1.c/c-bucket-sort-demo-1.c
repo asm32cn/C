@@ -20,13 +20,13 @@ int C[bn];
 
 void InsertionSort(int data[], int nLeft, int nRight){
     for(int i = nLeft + 1; i <= nRight; i++){
-        int get = data[i];
+        int nGet = data[i];
         int j = i - 1;
-        while(j >= nLeft && data[j] > get){
+        while(j >= nLeft && data[j] > nGet){
             data[j + 1] = data[j];
             j--;
         }
-        data[j + 1] = get;
+        data[j + 1] = nGet;
     }
 }
 
