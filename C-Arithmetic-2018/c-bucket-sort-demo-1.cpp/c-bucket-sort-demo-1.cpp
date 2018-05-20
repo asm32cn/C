@@ -4,7 +4,7 @@
 
 using namespace std;
 
-class InsertionSortDemo1{
+class BucketSortDemo1{
 private:
 	const static int MAX = 100;
 	const static int bn = 5;
@@ -13,7 +13,7 @@ private:
 
 public:
 
-	InsertionSortDemo1(){}
+	BucketSortDemo1(){}
 
 	void PA_DisplayData(int data[], int nCount){
 	    for(int i = 0; i < nCount; i++){
@@ -84,13 +84,13 @@ int main(){
     //     data[i] = rand() % 1000;
     // }
 
-    InsertionSortDemo1 * isd = new InsertionSortDemo1();
+    BucketSortDemo1 * bsd = new BucketSortDemo1();
 
-    isd->PA_DisplayData(data, nCount);
-    isd->BucketSort(data, nCount);
-    isd->PA_DisplayData(data, nCount);
+    bsd->PA_DisplayData(data, nCount);
+    bsd->BucketSort(data, nCount);
+    bsd->PA_DisplayData(data, nCount);
 
-    delete isd;
+    delete bsd;
     
     return 0;
 }
