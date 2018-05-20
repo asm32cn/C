@@ -4,67 +4,73 @@
 
 using namespace std;
 
+class InsertionSortDemo1{
+private:
+	const static int MAX = 100;
+	const static int bn = 5;
+	const static int nFactor = MAX % bn ? MAX / bn + 1 : MAX / bn;
+	int C[bn];
 
-const int MAX = 100;
-const int bn = 5;
-const int nFactor = MAX % bn ? MAX / bn + 1 : MAX / bn;
-int C[bn];
+public:
 
-void PA_DisplayData(int data[], int nCount){
-    for(int i = 0; i < nCount; i++){
-        if(i) cout << ", ";
-        cout << data[i];
-    }
-    cout << endl;
-}
+	InsertionSortDemo1(){}
 
-void InsertionSort(int A[], int nLeft, int nRight){
-    for(int i = nLeft + 1; i <= nRight; i++){
-        int nGet = A[i];
-        int j = i - 1;
-        while(j >= nLeft && A[j] > nGet){
-            A[j + 1] = A[j];
-            j--;
-        }
-        A[j + 1] = nGet;
-    }
-}
+	void PA_DisplayData(int data[], int nCount){
+	    for(int i = 0; i < nCount; i++){
+	        if(i) cout << ", ";
+	        cout << data[i];
+	    }
+	    cout << endl;
+	}
 
-int MapToBucket(int x){
-    return x / nFactor;
-}
+	void InsertionSort(int A[], int nLeft, int nRight){
+	    for(int i = nLeft + 1; i <= nRight; i++){
+	        int nGet = A[i];
+	        int j = i - 1;
+	        while(j >= nLeft && A[j] > nGet){
+	            A[j + 1] = A[j];
+	            j--;
+	        }
+	        A[j + 1] = nGet;
+	    }
+	}
 
-void CountingSort(int A[], int n){
-    for(int i = 0; i < bn; i++){
-        C[i] = 0;
-    }
-    for(int i = 0; i < n; i++){
-        C[MapToBucket(A[i])]++;
-    }
-    for(int i = 1; i < bn; i++){
-        C[i] = C[i] + C[i - 1];
-    }
-    int * B = new int[n];
-    for(int i = n - 1; i >= 0; i--){
-        int b = MapToBucket(A[i]);
-        B[--C[b]] = A[i];
-    }
-    for(int i = 0; i < n; i++){
-        A[i] = B[i];
-    }
-    delete B;
-}
+	int MapToBucket(int x){
+	    return x / nFactor;
+	}
 
-void BucketSort(int A[], int n){
-    CountingSort(A, n);
-    for(int i = 0; i < bn; i++){
-        int nLeft = C[i];
-        int nRight = (i == bn - 1 ? n - 1 : C[i + 1] - 1); // C[i + 1] - 1为i号桶最后一个元素的位置
-        if(nLeft < nRight){
-            InsertionSort(A, nLeft, nRight);
-        }
-    }
-}
+	void CountingSort(int A[], int n){
+	    for(int i = 0; i < bn; i++){
+	        C[i] = 0;
+	    }
+	    for(int i = 0; i < n; i++){
+	        C[MapToBucket(A[i])]++;
+	    }
+	    for(int i = 1; i < bn; i++){
+	        C[i] = C[i] + C[i - 1];
+	    }
+	    int * B = new int[n];
+	    for(int i = n - 1; i >= 0; i--){
+	        int b = MapToBucket(A[i]);
+	        B[--C[b]] = A[i];
+	    }
+	    for(int i = 0; i < n; i++){
+	        A[i] = B[i];
+	    }
+	    delete B;
+	}
+
+	void BucketSort(int A[], int n){
+	    CountingSort(A, n);
+	    for(int i = 0; i < bn; i++){
+	        int nLeft = C[i];
+	        int nRight = (i == bn - 1 ? n - 1 : C[i + 1] - 1); // C[i + 1] - 1为i号桶最后一个元素的位置
+	        if(nLeft < nRight){
+	            InsertionSort(A, nLeft, nRight);
+	        }
+	    }
+	}
+};
 
 int main(){
     // int data[] = {41, 67, 34, 0, 69, 24, 78, 58, 62, 64, 5, 45, 81, 27, 61, 91, 95, 42, 27, 36};
@@ -78,9 +84,13 @@ int main(){
     //     data[i] = rand() % 1000;
     // }
 
-    PA_DisplayData(data, nCount);
-    BucketSort(data, nCount);
-    PA_DisplayData(data, nCount);
+    InsertionSortDemo1 * isd = new InsertionSortDemo1();
+
+    isd->PA_DisplayData(data, nCount);
+    isd->BucketSort(data, nCount);
+    isd->PA_DisplayData(data, nCount);
+
+    delete isd;
     
     return 0;
 }
