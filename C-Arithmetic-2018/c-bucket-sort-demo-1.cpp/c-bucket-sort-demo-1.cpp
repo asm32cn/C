@@ -91,6 +91,6 @@ int main(){
 	bsd->PA_DisplayData(data, nCount);
 
 	delete bsd;
-	
+
 	return 0;
 }
