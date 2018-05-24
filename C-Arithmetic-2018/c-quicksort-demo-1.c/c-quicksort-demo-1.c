@@ -35,18 +35,18 @@ void QuickSort(int data[], int nLeft, int nRight){
 }
 
 void main(){
-    // int _source[] = {41, 67, 34, 0, 69, 24, 78, 58, 62, 64, 5, 45, 81, 27, 61, 91, 95, 42, 27, 36};
-    int _source[] = {76, 11, 11, 43, 78, 35, 39, 27, 16, 55, 1, 41, 24, 19, 54, 7, 78, 69, 65, 82};
-    int nCount = sizeof(_source) / sizeof(int);
+    // int data[] = {41, 67, 34, 0, 69, 24, 78, 58, 62, 64, 5, 45, 81, 27, 61, 91, 95, 42, 27, 36};
+    int data[] = {76, 11, 11, 43, 78, 35, 39, 27, 16, 55, 1, 41, 24, 19, 54, 7, 78, 69, 65, 82};
+    int nCount = sizeof(data) / sizeof(int);
 
     printf("Item count: %d\n", nCount);
 
     // srand(time(NULL));
     // for(int i = 0; i < 20; i++){
-    //     _source[i] = rand() % 100;
+    //     data[i] = rand() % 100;
     // }
 
-    PA_DisplayData(_source, nCount);
-    QuickSort(_source, 0, nCount - 1);
-    PA_DisplayData(_source, nCount);
+    PA_DisplayData(data, nCount);
+    QuickSort(data, 0, nCount - 1);
+    PA_DisplayData(data, nCount);
 }
