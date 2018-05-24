@@ -23,15 +23,15 @@ public:
 		cout << endl;
 	}
 
-	void InsertionSort(int A[], int nLeft, int nRight){
+	void InsertionSort(int data[], int nLeft, int nRight){
 		for(int i = nLeft + 1; i <= nRight; i++){
-			int nGet = A[i];
+			int nGet = data[i];
 			int j = i - 1;
-			while(j >= nLeft && A[j] > nGet){
-				A[j + 1] = A[j];
+			while(j >= nLeft && data[j] > nGet){
+				data[j + 1] = data[j];
 				j--;
 			}
-			A[j + 1] = nGet;
+			data[j + 1] = nGet;
 		}
 	}
 
@@ -39,34 +39,34 @@ public:
 		return x / nFactor;
 	}
 
-	void CountingSort(int A[], int n){
+	void CountingSort(int data[], int n){
 		for(int i = 0; i < bn; i++){
 			C[i] = 0;
 		}
 		for(int i = 0; i < n; i++){
-			C[MapToBucket(A[i])]++;
+			C[MapToBucket(data[i])]++;
 		}
 		for(int i = 1; i < bn; i++){
 			C[i] = C[i] + C[i - 1];
 		}
 		int * B = new int[n];
 		for(int i = n - 1; i >= 0; i--){
-			int b = MapToBucket(A[i]);
-			B[--C[b]] = A[i];
+			int b = MapToBucket(data[i]);
+			B[--C[b]] = data[i];
 		}
 		for(int i = 0; i < n; i++){
-			A[i] = B[i];
+			data[i] = B[i];
 		}
 		delete B;
 	}
 
-	void BucketSort(int A[], int n){
-		CountingSort(A, n);
+	void BucketSort(int data[], int n){
+		CountingSort(data, n);
 		for(int i = 0; i < bn; i++){
 			int nLeft = C[i];
 			int nRight = (i == bn - 1 ? n - 1 : C[i + 1] - 1); // C[i + 1] - 1为i号桶最后一个元素的位置
 			if(nLeft < nRight){
-				InsertionSort(A, nLeft, nRight);
+				InsertionSort(data, nLeft, nRight);
 			}
 		}
 	}
