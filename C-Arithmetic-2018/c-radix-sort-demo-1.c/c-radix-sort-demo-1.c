@@ -21,48 +21,48 @@ int GetDigit(int x, int d){
     return (x / radix[d]) % 10;
 }
 
-void CountingSort(int A[], int n, int d){
+void CountingSort(int data[], int n, int d){
     for(int i = 0; i < k; i++){
         C[i] = 0;
     }
     for(int i = 0; i < n; i++){
-        C[GetDigit(A[i], d)]++;
+        C[GetDigit(data[i], d)]++;
     }
     for(int i = 1; i < k; i++){
         C[i] = C[i] + C[i - 1];
     }
     int *B = (int *)malloc(n * sizeof(int));
     for(int i = n - 1; i >= 0; i--){
-        int dight = GetDigit(A[i], d);
-        B[--C[dight]] = A[i];
+        int dight = GetDigit(data[i], d);
+        B[--C[dight]] = data[i];
     }
     for(int i = 0; i < n; i++){
-        A[i] = B[i];
+        data[i] = B[i];
     }
     free(B);
 }
 
-void LsdRedixSort(int A[], int n){
+void LsdRedixSort(int data[], int n){
     for(int d = 1; d < dn; d++){
-        CountingSort(A, n, d);
+        CountingSort(data, n, d);
     }
 }
 
 int main(){
-    // int _source[] = {41, 67, 34, 0, 69, 24, 78, 58, 62, 64, 5, 45, 81, 27, 61, 91, 95, 42, 27, 36};
-    int _source[] = {76, 11, 11, 43, 78, 35, 39, 27, 16, 55, 1, 41, 24, 19, 54, 7, 78, 69, 65, 82};
-    int nCount = sizeof(_source) / sizeof(int);
+    // int data[] = {41, 67, 34, 0, 69, 24, 78, 58, 62, 64, 5, 45, 81, 27, 61, 91, 95, 42, 27, 36};
+    int data[] = {76, 11, 11, 43, 78, 35, 39, 27, 16, 55, 1, 41, 24, 19, 54, 7, 78, 69, 65, 82};
+    int nCount = sizeof(data) / sizeof(int);
 
     printf("Item count: %d\n", nCount);
 
     // srand(time(NULL));
     // for(int i = 0; i < 20; i++){
-    //     _source[i] = rand() % 100;
+    //     data[i] = rand() % 100;
     // }
 
-    PA_DisplayData(_source, nCount);
-    LsdRedixSort(_source, nCount);
-    PA_DisplayData(_source, nCount);
+    PA_DisplayData(data, nCount);
+    LsdRedixSort(data, nCount);
+    PA_DisplayData(data, nCount);
 
     return 0;
 }
