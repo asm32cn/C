@@ -15,35 +15,35 @@ void Swap(int data[], int i, int j){
     data[j] = temp;
 }
 
-void Heapify(int data[], int i, int size){
-    int left_child = 2 * i + 1;
-    int right_child = 2 * i + 2;
-    int max = i;
-    if(left_child < size && data[left_child] > data[max]){
-        max = left_child;
+void Heapify(int data[], int i, int nSize){
+    int nLeftChild = 2 * i + 1;
+    int nRightChild = 2 * i + 2;
+    int nMax = i;
+    if(nLeftChild < nSize && data[nLeftChild] > data[nMax]){
+        nMax = nLeftChild;
     }
-    if(right_child < size && data[right_child] > data[max]){
-        max = right_child;
+    if(nRightChild < nSize && data[nRightChild] > data[nMax]){
+        nMax = nRightChild;
     }
-    if(max != i){
-        Swap(data, i, max);
-        Heapify(data, max, size);
+    if(nMax != i){
+        Swap(data, i, nMax);
+        Heapify(data, nMax, nSize);
     }
 }
 
 int BuildHeap(int data[], int n){
-    int heap_size = n;
-    for(int i = heap_size / 2 - 1; i >= 0; i--){
-        Heapify(data, i, heap_size);
+    int nHeapSize = n;
+    for(int i = nHeapSize / 2 - 1; i >= 0; i--){
+        Heapify(data, i, nHeapSize);
     }
-    return heap_size;
+    return nHeapSize;
 }
 
 void HeapSort(int data[], int n){
-    int heap_size = BuildHeap(data, n);
-    while(heap_size > 1){
-        Swap(data, 0, --heap_size);
-        Heapify(data, 0, heap_size);
+    int nHeapSize = BuildHeap(data, n);
+    while(nHeapSize > 1){
+        Swap(data, 0, --nHeapSize);
+        Heapify(data, 0, nHeapSize);
     }
 }
 
