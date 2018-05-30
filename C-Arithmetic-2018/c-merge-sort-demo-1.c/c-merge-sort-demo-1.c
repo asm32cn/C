@@ -47,7 +47,7 @@ void MergeSortRecursion(int data[], int left, int right){
 void MergeSortIteration(int data[], int len){
     // 子数组索引，前一个为A[left ... mid]，后一个为A[mid + 1 ... right]
     int left, mid, right;
-    // 子数组的大小i初始为1，没轮翻倍
+    // 子数组的大小i初始为1，每轮翻倍
     for(int i = 1; i < len; i *= 2){
         left = 0;
         // 后一个子数组存在(需要归并)
