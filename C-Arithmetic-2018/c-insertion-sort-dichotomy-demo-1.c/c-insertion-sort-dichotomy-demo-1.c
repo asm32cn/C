@@ -11,21 +11,21 @@ void PA_DisplayData(int data[], int nCount){
 
 void InsertionSortDichotomy(int data[], int n){
     for(int i = 1; i < n; i++){
-        int get = data[i];
-        int left = 0;
-        int right = i - 1;
-        while(left <= right){
-            int mid = (left + right) / 2;
-            if(data[mid] > get){
-                right = mid - 1;
+        int nGet = data[i];
+        int nLeft = 0;
+        int nRight = i - 1;
+        while(nLeft <= nRight){
+            int nMid = (nLeft + nRight) / 2;
+            if(data[nMid] > nGet){
+                nRight = nMid - 1;
             }else{
-                left = mid + 1;
+                nLeft = nMid + 1;
             }
         }
-        for(int j = i - 1; j >= left; j--){
+        for(int j = i - 1; j >= nLeft; j--){
             data[j + 1] = data[j];
         }
-        data[left] = get;
+        data[nLeft] = nGet;
     }
 }
 
