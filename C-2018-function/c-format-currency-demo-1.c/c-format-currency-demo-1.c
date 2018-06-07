@@ -15,9 +15,9 @@ void PA_FormatCurrency(char * pszSource, char * pszResult, int nSize){
 	int lc = strlen(pszCache);
 
 	if( *pszCache == '-' ){
-		lc--;
 		*pszResult++ = '-';
 		pszCache++;
+		lc--;
 	}
 
 	if(lc > 6){
