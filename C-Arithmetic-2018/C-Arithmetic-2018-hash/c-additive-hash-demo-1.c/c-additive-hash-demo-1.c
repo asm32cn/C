@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int additiveHash(char * pszKey, int nPrime){
+int AdditiveHash(char * pszKey, int nPrime){
 	int nHash, i, n = strlen(pszKey);
 	for(nHash = n, i = 0; i < n; i++){
 		nHash += pszKey[i];
