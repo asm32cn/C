@@ -23,16 +23,16 @@ void main(){
 }
 
 /*
-0          C                 6   5
-1          C++               1  12
-2          Java             18   4
-3          C#               11   4
-4          Python           28  17
-5          Go               29  18
-6          Scala            24   4
-7          vb.net            6  23
-8          JavaScript        2  23
-9          PHP              18  18
-10         Perl              4  15
-11         Ruby             19  28
+0          C                        67   5
+1          C++                 1155463   0
+2          Java              168038906  27
+3          C#                     8812   8
+4          Python           1962499928   9
+5          Go                     9412  19
+6          Scala            1045413186   0
+7          vb.net            763463135   2
+8          JavaScript        557701633   8
+9          PHP                 1382392   9
+10         Perl              181595583   1
+11         Ruby              186364258   8
 */
