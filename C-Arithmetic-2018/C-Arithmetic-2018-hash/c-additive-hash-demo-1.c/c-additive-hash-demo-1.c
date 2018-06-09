@@ -15,7 +15,7 @@ void main(){
 	int nCount = sizeof(A_strKeys) / sizeof(char *);
 
 	for(int i = 0; i < nCount; i++){
-		printf("%-10d %-15s %3d\n", i, A_strKeys[i], additiveHash(A_strKeys[i],31));
+		printf("%-10d %-15s %3d\n", i, A_strKeys[i], AdditiveHash(A_strKeys[i],31));
 	}
 }
 
