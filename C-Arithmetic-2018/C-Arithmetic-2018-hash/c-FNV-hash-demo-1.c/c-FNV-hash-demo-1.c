@@ -6,9 +6,9 @@
 
 int M_SHIFT = 0;
 
-unsigned int FNVHash(char * pszKey){
-	int nHash = 2166136261;
+unsigned long FNVHash(char * pszKey){
 	int n = strlen(pszKey);
+	unsigned long nHash = 2166136261;
 	for(int i = 0; i < n; i++){
 		nHash = (nHash * 16777619) ^ pszKey[i];
 	}
@@ -22,7 +22,7 @@ void main(){
 	int nCount = sizeof(A_strKeys) / sizeof(char *);
 
 	for(int i = 0; i < nCount; i++){
-		unsigned int nHash = FNVHash(A_strKeys[i]);
+		unsigned long nHash = FNVHash(A_strKeys[i]);
 		printf("%-10d %-15s %12lu %3d\n", i, A_strKeys[i], nHash, nHash % 31);
 	}
 }
