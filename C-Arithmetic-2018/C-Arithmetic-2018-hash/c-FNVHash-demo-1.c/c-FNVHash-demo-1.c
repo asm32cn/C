@@ -1,4 +1,4 @@
-// c-FNV-hash-demo-1.c
+// c-FNVHash-demo-1.c
 #include <stdio.h>
 #include <string.h>
 
@@ -23,7 +23,7 @@ void main(){
 
 	for(int i = 0; i < nCount; i++){
 		unsigned long nHash = FNVHash(A_strKeys[i]);
-		printf("%-10d %-15s %12lu %3d\n", i, A_strKeys[i], nHash, nHash % 31);
+		printf("%-10d %-15s %12lu %3d\n", i, A_strKeys[i], nHash, nHash % 33);
 	}
 }
 
