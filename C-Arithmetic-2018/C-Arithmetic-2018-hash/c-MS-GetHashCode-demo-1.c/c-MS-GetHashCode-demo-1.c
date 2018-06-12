@@ -27,21 +27,21 @@ void main(){
 
 	for(int i = 0; i < nCount; i++){
 		unsigned long nHash = MS_GetHashCode(A_strKeys[i]);
-		printf("%-10d %-15s %12lu %3d\n", i, A_strKeys[i], nHash, nHash % 31);
+		printf("%-10d %-15s %12lu %3d\n", i, A_strKeys[i], nHash, nHash % 33);
 	}
 }
 
 /*
-0          C                 3070736349   8
-1          C++               3848949605  21
-2          Java               412864976   1
-3          C#                4257913053  30
-4          Python             275626405  11
-5          Go                4274707673  28
-6          Scala             3561231455   1
-7          vb.net             666464023  14
-8          JavaScript        1507798302  28
-9          PHP               1337035882  23
-10         Perl              3493520090  14
-11         Ruby              3093528536   3
+0          C                 3070736349  21
+1          C++               3848949605  17
+2          Java               412864976  29
+3          C#                4257913053   9
+4          Python             275626405  10
+5          Go                4274707673   5
+6          Scala             3561231455  23
+7          vb.net             666464023  16
+8          JavaScript        1507798302  21
+9          PHP               1337035882  28
+10         Perl              3493520090   5
+11         Ruby              3093528536  32
 */
