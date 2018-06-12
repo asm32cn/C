@@ -23,21 +23,21 @@ void main(){
 
 	for(int i = 0; i < nCount; i++){
 		unsigned int nHash = FNVHash1(A_strKeys[i]);
-		printf("%-10d %-15s %12lu %3d\n", i, A_strKeys[i], nHash, nHash % 31);
+		printf("%-10d %-15s %12lu %3d\n", i, A_strKeys[i], nHash, nHash % 33);
 	}
 }
 
 /*
-0          C                 2196503546   3
-1          C++               2331617826   8
-2          Java                 8810697   1
+0          C                 2196503546  17
+1          C++               2331617826  21
+2          Java                 8810697  27
 3          C#                3069945261   9
-4          Python            2130055597  27
-5          Go                3741730183  20
-6          Scala             1222329954  16
-7          vb.net            3093588254  15
-8          JavaScript          85664180  20
-9          PHP               1137923497  18
-10         Perl              2787627348  26
-11         Ruby              3352852179  28
+4          Python            2130055597  10
+5          Go                3741730183   4
+6          Scala             1222329954  21
+7          vb.net            3093588254  20
+8          JavaScript          85664180   8
+9          PHP               1137923497   7
+10         Perl              2787627348   0
+11         Ruby              3352852179   6
 */
