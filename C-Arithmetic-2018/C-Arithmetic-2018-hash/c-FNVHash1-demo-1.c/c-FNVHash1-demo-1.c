@@ -1,4 +1,4 @@
-// c-FNV1-hash-demo-1.c
+// c-FNVHash1-demo-1.c
 #include <stdio.h>
 #include <string.h>
 
