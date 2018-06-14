@@ -1,4 +1,4 @@
-// c-BKDR-hash-demo-1.c
+// c-BKDRHash-demo-1.c
 #include <stdio.h>
 #include <string.h>
 
