@@ -1,5 +1,6 @@
 // c-MS-GetHashCode-demo-1.c
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define M_MASK 31
@@ -8,16 +9,23 @@ int M_SHIFT = 0;
 
 unsigned long MS_GetHashCode(char * pszKey){
 	int n = strlen(pszKey);
-	char * pszData = pszKey;
+	int nSizeInt = sizeof(int);
+	int m = n + nSizeInt;
+	char * szData = malloc(m);
+	memset(szData, 0, m);
+	strcpy(szData, pszKey);
+
+	char * pszData = szData;
 	long nHash = 0x15051505;
 	long nHash2 = nHash;
 	int * pData = (int *)pszData;
-	for(int i = n; i > 0; i -= 4){
+	for(int i = n; i > 0; i -= nSizeInt + nSizeInt){
 		nHash = (((nHash << 5) + nHash) + (nHash >> 0x1b)) ^ pData[0];
-		if(i <= 2) break;
+		if(i <= nSizeInt) break;
 		nHash2 = (((nHash2 << 5) + nHash2) + (nHash2 >> 0x1b)) ^ pData[1];
 		pData += 2;
 	}
+	free(szData);
 	return (nHash + (nHash2 * 0x5d588b65));
 }
 
@@ -32,16 +40,16 @@ void main(){
 }
 
 /*
-0          C                 3070736349  21
-1          C++               3848949605  17
-2          Java               412864976  29
-3          C#                4257913053   9
-4          Python             275626405  10
-5          Go                4274707673   5
-6          Scala             3561231455  23
-7          vb.net             666464023  16
-8          JavaScript        1507798302  21
-9          PHP               1337035882  28
-10         Perl              3493520090   5
-11         Ruby              3093528536  32
+0          C                 3452614621  16
+1          C++               3450839261  23
+2          Java              3975468774  24
+3          C#                3452606685   0
+4          Python            3793951455  30
+5          Go                3452624089  13
+6          Scala             4273213458  30
+7          vb.net            2979897179  17
+8          JavaScript         855658811  29
+9          PHP               3457875952  25
+10         Perl              4059615984   6
+11         Ruby              3840459502  22
 */
