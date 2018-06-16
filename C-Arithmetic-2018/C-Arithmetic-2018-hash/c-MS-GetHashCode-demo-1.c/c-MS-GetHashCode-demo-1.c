@@ -30,7 +30,7 @@ unsigned long MS_GetHashCode(char * pszKey){
 }
 
 void main(){
-	char * A_strKeys[] = {"C", "C++", "Java", "C#", "Python", "Go", "Scala", "vb.net", "JavaScript", "PHP", "Perl", "Ruby"};
+	char * A_strKeys[] = {"C", "C++", "Java", "C#", "Python", "Go", "Scala", "vb.net", "JavaScript", "PHP", "Perl", "Ruby", "绝世"};
 	int nCount = sizeof(A_strKeys) / sizeof(char *);
 
 	for(int i = 0; i < nCount; i++){
@@ -39,6 +39,7 @@ void main(){
 	}
 }
 
+// gcc -finput-charset=UTF-8 -fexec-charset=GBK c-MS-GetHashCode-demo-1.c -o c-MS-GetHashCode-demo-1.exe
 /*
 0          C                 3452614621  16
 1          C++               3450839261  23
@@ -52,4 +53,5 @@ void main(){
 9          PHP               3457875952  25
 10         Perl              4059615984   6
 11         Ruby              3840459502  22
+12         绝世              2375044882   1
 */
