@@ -1,4 +1,4 @@
-// c-sort-filename-demo-1.c
+// c-sort-tiobe-filename-demo-1.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -51,14 +51,14 @@ int getDataspan(char * s, int * n){
 	char ch, * psz1 = s, * psz2 = matcher[0];
 	char cache[len + 1];
 	int i = 0, nDatespan;
-	while(*psz2++ == *psz1++) i++;
+	while(*psz1 && *psz2++ == *psz1++) i++;
 	if(i == matcher_len[0]){
 		nDatespan = 0;
 		// scan month
-		while((ch = *psz1++) && (ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z')) mm++;
-		if(mm > 0){
+		for(i = 0, psz1--; (ch = *psz1++) && (ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z'); i++);
+		if(i > 0){
 			memset(cache, 0, len + 1);
-			strncpy(cache, s + matcher_len[0], mm + 1);
+			strncpy(cache, s + matcher_len[0], i);
 			for(int j = 0; j < 12; j++){
 				if(strcmp(cache, A_pszMonths[j]) == 0){
 					mm = j + 1;
@@ -67,17 +67,13 @@ int getDataspan(char * s, int * n){
 			}
 			if(ch == ' '){
 				// scan year
-				psz2 = psz1;
-				while((ch = *psz1++) && (ch >= '0' && ch <= '9')) yy++;
-				if(yy > 0){
+				for(i= 0, psz2 = psz1; (ch = *psz1++) && (ch >= '0' && ch <= '9'); i++);
+				if(i == 4){
 					memset(cache, 0, len + 1);
 					strncpy(cache, psz2, 4);
 					yy = atoi(cache);
 
-					psz1--;
-					psz2 = matcher[1];
-					i = 0;
-					while(*psz1 && *psz2 && *psz1++ == *psz2++) i++;
+					for(i = 0, psz2 = matcher[1], psz1--; *psz1 && *psz2 && *psz1++ == *psz2++; i++);
 					if(i == matcher_len[1]){
 						nDatespan = yy * 100 + mm;
 					}
@@ -85,9 +81,9 @@ int getDataspan(char * s, int * n){
 			}
 		}
 	}else{
-		nDatespan = (*n)++;
+		nDatespan = ++(*n);
 	}
-	// printf("%-35s %3d %3d %3d\n", s, i, *n, nDatespan);
+	// printf("%-35s %4d %3d %3d %6d\n", s, yy, mm, *n, nDatespan);
 	return nDatespan;
 }
 
@@ -117,14 +113,11 @@ void sortFileName(char ** pszFiles, char ** pszSorted, int nCount){
 		}
 	}
 
-	// gernate result
+	// write result
 	for(int i = 0; i < nCount; i++){
 		pszSorted[i] = pszFiles[getIndex(buff, i)];
-		// printf("%d %d %d\n", buff[i * 3 + 0], buff[i * 3 + 1], buff[i * 3 + 2]);
-		// pszSorted[i] = pszFiles[i];
 	}
 	free(buff);
-	// return pszFiles;
 }
 
 /*
