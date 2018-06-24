@@ -6,7 +6,7 @@
 char * A_pszMonths[] = {"January", "February", "March", "April", "May", "June",
 	"July", "August", "September", "October", "November", "December"};
 
-void sortFileName(char ** pszFiles, char** pszSorted, int nCount);
+void SortFileName(char ** pszFiles, char** pszSorted, int nCount);
 
 void main(){
 	char * A_pszFiles[] = {"TIOBE Index for April 2018.html",
@@ -23,7 +23,7 @@ void main(){
 	int nCount = sizeof(A_pszFiles) / sizeof(char *);
 	char ** A_pszSorted = (char **) malloc(sizeof(char *) * nCount);
 
-	sortFileName(A_pszFiles, A_pszSorted, nCount);
+	SortFileName(A_pszFiles, A_pszSorted, nCount);
 
 	printf("@  %-36s %-36s\n", "Source data", "Sorted data");
 	printf("== %-36s %-36s\n", "==================", "==================");
@@ -32,19 +32,19 @@ void main(){
 	}
 }
 
-int getIndex(int * data, int i){
+int GetIndex(int * data, int i){
 	return data[i * 3 + 1];
 }
 
-void setIndex(int * data, int i, int n){
+void SetIndex(int * data, int i, int n){
 	data[i * 3 + 1] = n;
 }
 
-int getData(int * data, int i){
-	return data[getIndex(data, i) * 3 + 2];
+int GetData(int * data, int i){
+	return data[GetIndex(data, i) * 3 + 2];
 }
 
-int getDataspan(char * s, int * n){
+int GetDataspan(char * s, int * n){
 	int mm = 0, yy = 0, len = strlen(s);
 	char * matcher[] = {"TIOBE Index for ", ".html"};
 	int matcher_len[] = {strlen(matcher[0]), strlen(matcher[1])};
@@ -87,7 +87,7 @@ int getDataspan(char * s, int * n){
 	return nDatespan;
 }
 
-void sortFileName(char ** pszFiles, char ** pszSorted, int nCount){
+void SortFileName(char ** pszFiles, char ** pszSorted, int nCount){
 	int * buff = (int *)malloc(sizeof(int) * 3 * nCount);
 
 	// init buff
@@ -95,27 +95,27 @@ void sortFileName(char ** pszFiles, char ** pszSorted, int nCount){
 	for(int i = 0; i < nCount; i++){
 		int nOffset = i * 3;
 		buff[nOffset + 0] = buff[nOffset + 1] = i;
-		buff[nOffset + 2] = getDataspan(pszFiles[i], &n);
+		buff[nOffset + 2] = GetDataspan(pszFiles[i], &n);
 	}
 
 	// sort data
 	for(int i = 0; i < nCount - 1; i++){
 		int nMin = i;
 		for(int j = i + 1; j < nCount; j++){
-			if(getData(buff, j) < getData(buff, nMin)){
+			if(GetData(buff, j) < GetData(buff, nMin)){
 				nMin = j;
 			}
 		}
 		if(i != nMin){
-			int t = getIndex(buff, i);
-			setIndex(buff, i, getIndex(buff, nMin));
-			setIndex(buff, nMin, t);
+			int t = GetIndex(buff, i);
+			SetIndex(buff, i, GetIndex(buff, nMin));
+			SetIndex(buff, nMin, t);
 		}
 	}
 
 	// write result
 	for(int i = 0; i < nCount; i++){
-		pszSorted[i] = pszFiles[getIndex(buff, i)];
+		pszSorted[i] = pszFiles[GetIndex(buff, i)];
 	}
 	free(buff);
 }
