@@ -126,3 +126,19 @@ void sortFileName(char ** pszFiles, char ** pszSorted, int nCount){
 	free(buff);
 	// return pszFiles;
 }
+
+/*
+@  Source data                          Sorted data
+== ==================                   ==================
+0  TIOBE Index for April 2018.html      TIOBE-exchange-matrix-data.html
+1  TIOBE Index for February 2018.html   TIOBE-exchange-matrix-data.py
+2  TIOBE Index for January 2018.html    TIOBE-gernate-index-py2.py
+3  TIOBE Index for June 2018.html       TIOBE-index.html
+4  TIOBE Index for March 2018.html      TIOBE_matrixData.txt
+5  TIOBE Index for May 2018.html        TIOBE Index for January 2018.html
+6  TIOBE-exchange-matrix-data.html      TIOBE Index for February 2018.html
+7  TIOBE-exchange-matrix-data.py        TIOBE Index for March 2018.html
+8  TIOBE-gernate-index-py2.py           TIOBE Index for April 2018.html
+9  TIOBE-index.html                     TIOBE Index for May 2018.html
+10 TIOBE_matrixData.txt                 TIOBE Index for June 2018.html
+*/
