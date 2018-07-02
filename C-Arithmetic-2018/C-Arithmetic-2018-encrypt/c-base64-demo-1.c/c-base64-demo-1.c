@@ -64,11 +64,40 @@ int Base64Encode(char* lpszData, char* lpszEncrypt){
 	return 1;
 }
 
+unsigned char GetKeyIndex(unsigned char ch){
+	for(int i = 0; i < 64; i++){
+		if(szKey[i] == ch) return i;
+	}
+	return 64;
+}
+
+int Base64Decode(char* lpszEncrypt, char* lpszData){
+	int i = 0, n = 0, nCount = strlen(lpszEncrypt);
+	unsigned char chr1 = 0, chr2 = 0, chr3 = 0;
+	unsigned char enc1 = 0, enc2 = 0, enc3 = 0, enc4 = 0;
+	while(i < nCount){
+		enc1 = GetKeyIndex(lpszEncrypt[i++]);
+		enc2 = GetKeyIndex(lpszEncrypt[i++]);
+		enc3 = GetKeyIndex(lpszEncrypt[i++]);
+		enc4 = GetKeyIndex(lpszEncrypt[i++]);
+
+		chr1 = (enc1 << 2) | (enc2 >> 4);
+		chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+		chr3 = ((enc3 & 3) << 6) | enc4;
+		lpszData[n++] = chr1;
+		if(enc3 != 64) lpszData[n++] = chr2;
+		if(enc4 != 64) lpszData[n++] = chr3;
+	}
+	lpszData[n] = 0;
+	return 1;
+}
+
 void main(){
 	unsigned char * pszData = "c-base64-demo-1.c\n程序中书写着所见所闻所感，编译着心中的万水千山。";
 	int nCount = strlen(pszData);
 	int nCacheSize = (nCount + 2) / 3 * 4 + 1;
 	unsigned char * pszEncrypt = malloc(nCacheSize);
+	unsigned char * pszDecrypt = malloc(nCount + 1);
 
 	printf("c-base64-demo-1.c\n");
 	DisplayHexString(pszData);
@@ -80,7 +109,11 @@ void main(){
 	Base64Encode(pszData, pszEncrypt);
 	printf("%s\n", pszEncrypt);
 
+	Base64Decode(pszEncrypt, pszDecrypt);
+	printf("%s\n", pszDecrypt);
+
 	free(pszEncrypt);
+	free(pszDecrypt);
 }
 
 /*
@@ -94,4 +127,6 @@ B4 E5 8D 83 E5 B1 B1 E3-80 82                   ..........
 c-base64-demo-1.c
 程序中书写着所见所闻所感，编译着心中的万水千山。
 Yy1iYXNlNjQtZGVtby0xLmMK56iL5bqP5Lit5Lmm5YaZ552A5omA6KeB5omA6Ze75omA5oSf77yM57yW6K+R552A5b+D5Lit55qE5LiH5rC05Y2D5bGx44CC
+c-base64-demo-1.c
+程序中书写着所见所闻所感，编译着心中的万水千山。
 */
