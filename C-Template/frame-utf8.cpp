@@ -2,7 +2,7 @@
 
 LRESULT CALLBACK WindowFunc(HWND,UINT,WPARAM,LPARAM);
 
-char szWinName[]="MyWin";
+char szWinName[]="PaSDKFrame";
 
 int WINAPI WinMain(HINSTANCE hThisInst,HINSTANCE hPrevInst,
 				   LPSTR lpszArgs,int nWinMode){
