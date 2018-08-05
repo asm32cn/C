@@ -1,0 +1,3 @@
+#define   ICON1   1
+
+ICON1     ICON    "gcc-sqlite3-db-demo-1.ico"
