@@ -1,4 +1,5 @@
 // gcc-sqlite3-db-demo-1.c
+#include <unistd.h>
 
 #include <windows.h>
 #include <commctrl.h>
@@ -6,8 +7,9 @@
 
 #include "sqlite3.h"
 
-#define LVS_EX_FULLROWSELECT 0x20
+#define LVS_EX_FULLROWSELECT 32
 #define LVS_EX_GRIDLINES 1
+
 
 // void main(){
 // 	char * A_szKeys[] = {"id", "strTitle", "strDate", "nCateID", "strCateName", "nCount", "strMemo"};
@@ -42,9 +44,15 @@
 // 	}
 // }
 
+int UTF8_GBK(char* szUtf8, char* szGBK, int nLen);
+
+
 LRESULT CALLBACK WindowFunc(HWND,UINT,WPARAM,LPARAM);
 
 char szWinName[]="gcc-sqlite3-db-demo-1.c";
+
+WORD nClientWidth;
+WORD nClientHeight;
 
 HWND ghWnd = NULL;
 HINSTANCE ghInstance = NULL;
@@ -80,7 +88,7 @@ int WINAPI WinMain(HINSTANCE hThisInst,HINSTANCE hPrevInst,
 	//创建一个窗口
 	hWnd=CreateWindow(
 		szWinName,                  //窗口类名
-		"Windows 98 Framework",     //标题
+		szWinName,                  //标题
 		WS_OVERLAPPEDWINDOW,        //窗口模式
 		CW_USEDEFAULT,              // X 坐标
 		CW_USEDEFAULT,              // Y 坐标
@@ -159,6 +167,7 @@ LRESULT CALLBACK WindowFunc(HWND hWnd,UINT message,
 				rc = sqlite3_prepare(db, szQuery, -1, &stmt, 0);
 				if(rc == SQLITE_OK){
 					INT nFields = sqlite3_column_count(stmt);
+					char szNull[] = "";
 					while( (sqlite3_step(stmt)) == SQLITE_ROW){
 						sprintf(szText, "%s", sqlite3_column_text(stmt, 0));
 
@@ -169,9 +178,14 @@ LRESULT CALLBACK WindowFunc(HWND hWnd,UINT message,
 						INT nItemID = ListView_InsertItem(hListCtrl, &lvItem);
 						if(nItemID >= 0){
 							for(int i = 1; i < 7; i++){
-							// 	char szCell[256] = {0};
-							// 	sprintf(szCell, "%s", sqlite3_column_text(stmt, i));
-							// // 	ListView_SetItemText(hListCtrl, nItemID, i, szText);
+								const unsigned char * pszCell = sqlite3_column_text(stmt, i);
+								if(pszCell == NULL){
+									pszCell = szNull;
+								}else{
+									UTF8_GBK((char *)pszCell, szText, sizeof(szText));
+									pszCell = szText;
+								}
+								ListView_SetItemText(hListCtrl, nItemID, i, pszCell);
 							}
 						}
 						nRow++;
@@ -183,7 +197,15 @@ LRESULT CALLBACK WindowFunc(HWND hWnd,UINT message,
 			}else{
 				printf("Can't open database: %s\n", sqlite3_errmsg(db));
 			}
-
+		}
+		break;
+	case WM_SIZE:
+		{
+			nClientWidth  = LOWORD(lParam);
+			nClientHeight = HIWORD(lParam);
+			if(nClientWidth>0 && nClientHeight>0){
+				MoveWindow(hListCtrl, 0, 0, nClientWidth, nClientHeight, TRUE);
+			}
 		}
 		break;
 	case WM_DESTROY: //终止进程
@@ -197,3 +219,21 @@ LRESULT CALLBACK WindowFunc(HWND hWnd,UINT message,
 }
 
 
+int UTF8_GBK(char* szUtf8, char* szGBK, int nLen){
+	int n = MultiByteToWideChar(CP_UTF8, 0, szUtf8, -1, NULL, 0);
+	// WCHAR* wszGBK = new WCHAR[sizeof(WCHAR) * n];
+	WCHAR* wszGBK = malloc(sizeof(WCHAR) * n);
+	memset(wszGBK, 0, sizeof(WCHAR) * n);
+	MultiByteToWideChar(CP_UTF8, 0, szUtf8, -1, wszGBK, n);
+
+	n = WideCharToMultiByte(CP_ACP, 0, wszGBK, -1, NULL, 0, NULL, NULL);
+	if(n>nLen){
+		free(wszGBK);
+		return -1;
+	}
+	WideCharToMultiByte(CP_ACP, 0, wszGBK, -1, szGBK, n, NULL, NULL);
+	// delete[] wszGBK;
+	free(wszGBK);
+	wszGBK = NULL;
+	return 0;
+}
