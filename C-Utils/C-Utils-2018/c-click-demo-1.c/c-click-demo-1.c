@@ -56,10 +56,9 @@ LRESULT CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 		// 		MessageBox(NULL, "WM_CREATE", pszDlgTitle, MB_OK);
 		// 		break;
 		// 	}
-		case WM_COMMAND:
+		case WM_COMMAND:{
 			switch(LOWORD(wParam)){
-			case IDOK:
-				{
+				case IDOK:{
 					POINT pt;
 					GetCursorPos(&pt);
 
@@ -70,12 +69,11 @@ LRESULT CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 					SetDlgItemInt(hWnd, IDC_POSOTION_Y, nPosY, FALSE);
 					break;
 				}
-			case IDCANCEL:
-				if(isStart) KillTimer(hWnd, nTimer1);
-				EndDialog(hWnd, IDOK);
-				return TRUE;
-			case IDC_START:
-				{
+				case IDCANCEL:
+					if(isStart) KillTimer(hWnd, nTimer1);
+					EndDialog(hWnd, IDOK);
+					return TRUE;
+				case IDC_START:{
 					EnableWindow( GetDlgItem( hWnd, IDC_POSOTION_X), isStart);
 					EnableWindow( GetDlgItem( hWnd, IDC_POSOTION_Y), isStart);
 					EnableWindow( GetDlgItem( hWnd, IDC_COUNT), isStart);
@@ -105,34 +103,35 @@ LRESULT CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 						isStart = TRUE;
 						SetTimer(hWnd, nTimer1, 500, NULL);
 					}
+					break;
 				}
-				break;
 			}
 			break;
+		}
 		case WM_INITDIALOG:{
 
-				SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE);
+			SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE);
 
-				SetDlgItemInt(hWnd, IDC_POSOTION_X, nPosX, TRUE);
-				SetDlgItemInt(hWnd, IDC_POSOTION_Y, nPosY, TRUE);
-				SetDlgItemInt(hWnd, IDC_COUNT, MAX_COUNT, TRUE);
-				SetDlgItemInt(hWnd, IDC_STEP, nMaxStep, TRUE);
+			SetDlgItemInt(hWnd, IDC_POSOTION_X, nPosX, TRUE);
+			SetDlgItemInt(hWnd, IDC_POSOTION_Y, nPosY, TRUE);
+			SetDlgItemInt(hWnd, IDC_COUNT, MAX_COUNT, TRUE);
+			SetDlgItemInt(hWnd, IDC_STEP, nMaxStep, TRUE);
 
-				RECT rect;
-				GetWindowRect(hWnd, &rect);
-				INT m_nDlgW = rect.right - rect.left;
-				INT m_nDlgH = rect.bottom - rect.top;
-				INT m_nScreenW = GetSystemMetrics(SM_CXSCREEN);
-				INT m_nScreenH = GetSystemMetrics(SM_CYSCREEN);
-				MoveWindow(hWnd, (m_nScreenW - m_nDlgW) / 2, (m_nScreenH - m_nDlgH) / 2, m_nDlgW, m_nDlgH, TRUE);
+			RECT rect;
+			GetWindowRect(hWnd, &rect);
+			INT m_nDlgW = rect.right - rect.left;
+			INT m_nDlgH = rect.bottom - rect.top;
+			INT m_nScreenW = GetSystemMetrics(SM_CXSCREEN);
+			INT m_nScreenH = GetSystemMetrics(SM_CYSCREEN);
+			MoveWindow(hWnd, (m_nScreenW - m_nDlgW) / 2, (m_nScreenH - m_nDlgH) / 2, m_nDlgW, m_nDlgH, TRUE);
 
-				// SetIcon(ghIcon, TRUE);  // 设置大图标无效
-				// SetIcon(ghIcon, FALSE); // 设置大图标无效
-				SendMessage(hWnd, WM_SETICON, ICON_BIG, (long)ghIcon);
-				SendMessage(hWnd, WM_SETICON, ICON_SMALL, (long)ghIcon);
+			// SetIcon(ghIcon, TRUE);  // 设置大图标无效
+			// SetIcon(ghIcon, FALSE); // 设置大图标无效
+			SendMessage(hWnd, WM_SETICON, ICON_BIG, (long)ghIcon);
+			SendMessage(hWnd, WM_SETICON, ICON_SMALL, (long)ghIcon);
 
-				break;
-			}
+			break;
+		}
 		case WM_TIMER:{
 
 			HWND hPBMCount = GetDlgItem(hWnd, IDC_PROGRESS_COUNT);
