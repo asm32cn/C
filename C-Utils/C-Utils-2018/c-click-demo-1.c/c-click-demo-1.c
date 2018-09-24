@@ -52,10 +52,10 @@ void PA_DoClick(int x, int y){
 LRESULT CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	switch(uMsg){
 		// case WM_CREATE:{ // 这个消息在这里是不会生效的
-		// 		CREATESTRUCT * pcs = (CREATESTRUCT*)lParam;
-		// 		MessageBox(NULL, "WM_CREATE", pszDlgTitle, MB_OK);
-		// 		break;
-		// 	}
+		// 	CREATESTRUCT * pcs = (CREATESTRUCT*)lParam;
+		// 	MessageBox(NULL, "WM_CREATE", pszDlgTitle, MB_OK);
+		// 	break;
+		// }
 		case WM_COMMAND:{
 			switch(LOWORD(wParam)){
 				case IDOK:{
