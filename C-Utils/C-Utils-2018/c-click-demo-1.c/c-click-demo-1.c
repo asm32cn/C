@@ -9,7 +9,7 @@
 #define ICON1 1
 
 #define MAX_COUNT 70
-#define MAX_STEP 24
+#define MAX_STEP 12
 
 HICON ghIcon;
 
@@ -18,7 +18,7 @@ char szDisplay[1024] = {0};
 
 INT nTimer1 = 1;
 
-INT isStart = FALSE;
+BOOL isStart = FALSE;
 
 INT nPosX = 1328;
 INT nPosY = 777;
@@ -26,7 +26,7 @@ INT nCount = 0;
 INT nStep = 0;
 
 INT nMaxCount = MAX_COUNT;
-INT nMaxStep = MAX_STEP;
+INT nMaxStep = MAX_STEP * 2;
 
 
 void PA_DoClick(int x, int y){
@@ -74,10 +74,12 @@ LRESULT CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 					EndDialog(hWnd, IDOK);
 					return TRUE;
 				case IDC_START:{
+
 					EnableWindow( GetDlgItem( hWnd, IDC_POSOTION_X), isStart);
 					EnableWindow( GetDlgItem( hWnd, IDC_POSOTION_Y), isStart);
 					EnableWindow( GetDlgItem( hWnd, IDC_COUNT), isStart);
 					EnableWindow( GetDlgItem( hWnd, IDC_STEP), isStart);
+
 					if(isStart){
 						isStart = FALSE;
 						KillTimer(hWnd, nTimer1);
@@ -86,7 +88,7 @@ LRESULT CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 						nPosX = GetDlgItemInt(hWnd, IDC_POSOTION_X, NULL, TRUE);
 						nPosY = GetDlgItemInt(hWnd, IDC_POSOTION_Y, NULL, TRUE);
 						nMaxCount = GetDlgItemInt(hWnd, IDC_COUNT, NULL, TRUE);
-						nMaxStep  = GetDlgItemInt(hWnd, IDC_STEP, NULL, TRUE);
+						nMaxStep  = GetDlgItemInt(hWnd, IDC_STEP, NULL, TRUE) * 2;
 
 						HWND hPBMCount = GetDlgItem(hWnd, IDC_PROGRESS_COUNT);
 						if(hPBMCount != NULL){
@@ -115,7 +117,7 @@ LRESULT CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 			SetDlgItemInt(hWnd, IDC_POSOTION_X, nPosX, TRUE);
 			SetDlgItemInt(hWnd, IDC_POSOTION_Y, nPosY, TRUE);
 			SetDlgItemInt(hWnd, IDC_COUNT, MAX_COUNT, TRUE);
-			SetDlgItemInt(hWnd, IDC_STEP, nMaxStep, TRUE);
+			SetDlgItemInt(hWnd, IDC_STEP, MAX_STEP, TRUE);
 
 			RECT rect;
 			GetWindowRect(hWnd, &rect);
@@ -123,6 +125,7 @@ LRESULT CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 			INT m_nDlgH = rect.bottom - rect.top;
 			INT m_nScreenW = GetSystemMetrics(SM_CXSCREEN);
 			INT m_nScreenH = GetSystemMetrics(SM_CYSCREEN);
+
 			MoveWindow(hWnd, (m_nScreenW - m_nDlgW) / 2, (m_nScreenH - m_nDlgH) / 2, m_nDlgW, m_nDlgH, TRUE);
 
 			// SetIcon(ghIcon, TRUE);  // 设置大图标无效
