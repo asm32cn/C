@@ -1,0 +1,114 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define LANG_CHINESE        0x04
+#define SUBLANG_CHINESE_SIMPLIFIED 0x02
+
+#define DS_SETFONT          0x40L
+#define DS_MODALFRAME       0x80L
+#define WS_POPUP            0x80000000
+#define WS_CAPTION          0xC00000
+#define WS_SYSMENU          0x80000
+#define WS_MINIMIZEBOX      0x00020000L
+
+
+#define ES_CENTER           0x0001L
+#define ES_AUTOHSCROLL      0x0080L
+#define WS_BORDER           0x00800000L
+
+
+#define   ICON1   1
+ICON1     ICON    "c-click-demo-1.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (Simplified, PRC) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG1 DIALOGEX 0, 0, 212, 88
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
+CAPTION "c-click-demo-1"
+FONT 12, "Fixedsys", 400, 0, 0x86
+BEGIN
+    LTEXT           "Posi:",-1,7,7,23,8
+    EDITTEXT        IDC_POSOTION_X,28,5,24,13,ES_CENTER | ES_AUTOHSCROLL
+    EDITTEXT        IDC_POSOTION_Y,57,5,24,13,ES_CENTER | ES_AUTOHSCROLL
+    LTEXT           "Count:",-1,99,7,23,8
+    EDITTEXT        IDC_COUNT,125,5,24,13,ES_CENTER | ES_AUTOHSCROLL
+    LTEXT           "Step:",-1,157,7,18,8
+    EDITTEXT        IDC_STEP,180,5,24,13,ES_CENTER | ES_AUTOHSCROLL
+    CONTROL         "",IDC_PROGRESS_COUNT,"msctls_progress32",WS_BORDER,7,25,197,11
+    CONTROL         "",IDC_PROGRESS_STEP,"msctls_progress32",WS_BORDER,7,43,197,11
+    PUSHBUTTON      "Start",IDC_START,7,66,50,14
+    DEFPUSHBUTTON   "OK",IDOK,98,66,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,154,66,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 204
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 80
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Chinese (Simplified, PRC) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
