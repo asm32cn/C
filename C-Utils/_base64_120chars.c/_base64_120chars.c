@@ -29,8 +29,8 @@ int file_to_base64(char * pszFileName) {
 	int chr1 = 0, chr2 = 0, chr3 = 0;
 	int enc1 = 0, enc2 = 0, enc3 = 0, enc4 = 0;
 	while ((chr1 = fgetc(fp)) != EOF) {
-		chr2 = fgetc(fp);
 		enc1 = chr1 >> 2;
+		chr2 = fgetc(fp);
 		if (chr2 == EOF) {
 			enc2 = (chr1 & 3) << 4;
 			enc3 = enc4 = 64;
