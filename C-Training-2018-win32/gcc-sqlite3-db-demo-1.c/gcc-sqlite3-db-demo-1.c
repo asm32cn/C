@@ -1,5 +1,5 @@
 // gcc-sqlite3-db-demo-1.c
-#include <unistd.h>
+// #include <unistd.h>
 
 #include <windows.h>
 #include <commctrl.h>
@@ -7,8 +7,8 @@
 
 #include "sqlite3.h"
 
-#define LVS_EX_FULLROWSELECT 32
-#define LVS_EX_GRIDLINES 1
+// #define LVS_EX_FULLROWSELECT 32
+// #define LVS_EX_GRIDLINES 1
 
 
 // void main(){
@@ -43,6 +43,13 @@
 // 		printf("Can't open database: %s\n", sqlite3_errmsg(db));
 // 	}
 // }
+
+
+// void ListView_SetExtendedListViewStyle(
+// 	HWND hwndLV,
+// 	DWORD dwExStyle
+// );
+
 
 int UTF8_GBK(char* szUtf8, char* szGBK, int nLen);
 
@@ -124,7 +131,7 @@ LRESULT CALLBACK WindowFunc(HWND hWnd,UINT message,
 			cy = rect.bottom;
 
 			int rowIndex = 7;
-			hListCtrl = CreateWindow("syslistview32", "", WS_VISIBLE | WS_CHILD | WS_BORDER | LVS_REPORT | LVS_SHOWSELALWAYS,
+			hListCtrl = CreateWindow("SysListView32", "", WS_VISIBLE | WS_CHILD | WS_BORDER | LVS_REPORT | LVS_SHOWSELALWAYS,
 						0, 0, cx, cy, hWnd, NULL, ghInstance, NULL);
 
 			// ListView_SetExtendedListViewStyle(hListCtrl, LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
